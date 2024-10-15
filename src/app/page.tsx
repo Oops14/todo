@@ -1,24 +1,31 @@
 "use server";
 
 import ListOfTodos from "@/modules/todo/components/listOfTodos/ListOfTodos";
+
 import AddTodoForm from "@/shared/addTodoForm/AddTodoForm";
 
 import Typography from "@/ui/typography/Typography";
 
-import { getData } from "@/services/api";
-
-import { TodosData } from "@/types/TodosDataType";
-
 import s from "./page.module.scss";
 
-export default async function Home() {
-  const data: TodosData[] = await getData();
+const getData = async () => {
+  const response = await fetch(`http://localhost:3000/todos`, {
+    next: { revalidate: 0 },
+  });
 
-  console.log(data);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return await response.json();
+};
+
+export default async function Home() {
+  const data = await getData();
 
   return (
     <div className={s.page}>
-      <main>
+      <main className={s.main_content}>
         <div className={s.todolist}>
           <Typography tag="h2" className={s.todolist__title}>
             Todolist

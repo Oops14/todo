@@ -11,9 +11,10 @@ interface TodoProps {
   id: number;
   title: string;
   description: string;
+  handleDelete: (id: number) => void;
 }
 
-const Todo: FC<TodoProps> = ({ id, title, description }) => {
+const Todo: FC<TodoProps> = ({ id, title, description, handleDelete }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
 
@@ -26,11 +27,7 @@ const Todo: FC<TodoProps> = ({ id, title, description }) => {
       {isEditable ? (
         <>
           <div className="todo_top_content">
-            <input
-              type="text"
-              value={editedTitle}
-              onChange={e => setEditedTitle(e.target.value)}
-            />
+            <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
           </div>
           <div>
             <Button onClick={() => {}}>Save</Button>
@@ -45,7 +42,13 @@ const Todo: FC<TodoProps> = ({ id, title, description }) => {
           </div>
           <div>
             <Button onClick={toggleEdit}>Edit</Button>
-            <Button>X</Button>
+            <Button
+              onClick={() => {
+                handleDelete(id);
+              }}
+            >
+              X
+            </Button>
           </div>
         </>
       )}
