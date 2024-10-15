@@ -5,3 +5,23 @@
 
   margin-bottom: 40px;
 }
+
+.block_buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.block__button {
+  outline: none;
+  border: 0;
+  padding: 8px;
+  border-radius: 3px;
+  background-color: #4a90e2;
+  color: #fff;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import SubmitButton from "@/components/submitButton/SubmitButton";
 
 import Form from "@/ui/form/Form";
@@ -8,6 +10,8 @@ import Input from "@/ui/input/Input";
 import s from "./AddTodoForm.module.scss";
 
 const AddTodoForm = () => {
+  const router = useRouter();
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -26,6 +30,7 @@ const AddTodoForm = () => {
       const data = await res.json();
       console.log("Todo created:", data);
 
+      router.refresh();
       // Reset the form.
       e.target.reset();
     } catch (error) {

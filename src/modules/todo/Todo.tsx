@@ -29,20 +29,29 @@ const Todo: FC<TodoProps> = ({ id, title, description, handleDelete }) => {
           <div className="todo_top_content">
             <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
           </div>
-          <div>
-            <Button onClick={() => {}}>Save</Button>
-            <Button onClick={toggleEdit}>Cancel</Button>
+          <div className={s.block_buttons}>
+            <Button className={s.block__button} onClick={() => {}}>
+              Save
+            </Button>
+            <Button className={s.block__button} onClick={toggleEdit}>
+              Cancel
+            </Button>
           </div>
         </>
       ) : (
         <>
           <div className="todo_top_content">
-            <Typography tag="h4">{title}</Typography>
-            <div>{description}</div>
+            <Typography className={s.todo_top_content__title} tag="h4">
+              {title}
+            </Typography>
+            <div className={s.todo_top_content__description}>{description}</div>
           </div>
-          <div>
-            <Button onClick={toggleEdit}>Edit</Button>
+          <div className={s.block_buttons}>
+            <Button className={s.block__button} onClick={toggleEdit}>
+              Edit
+            </Button>
             <Button
+              className={s.block__button}
               onClick={() => {
                 handleDelete(id);
               }}

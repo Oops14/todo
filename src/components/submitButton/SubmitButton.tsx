@@ -1,7 +1,7 @@
 "use client";
 
-import React, { ButtonHTMLAttributes, FC } from "react";
 import { useFormStatus } from "react-dom";
+import React, { ButtonHTMLAttributes, FC } from "react";
 
 import Button from "@/ui/button/Button";
 
