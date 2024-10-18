@@ -2,8 +2,8 @@
 
 import { FC, useState } from "react";
 
-import Button from "@/ui/button/Button";
-import Typography from "@/ui/typography/Typography";
+import EditedTodo from "./components/editedTodo/EditedTodo";
+import DefaultTodo from "./components/defaultTodo/DefaultTodo";
 
 import s from "./Todo.module.scss";
 
@@ -26,39 +26,23 @@ const Todo: FC<TodoProps> = ({ id, title, description, handleDelete }) => {
     <div className={s.todo_item}>
       {isEditable ? (
         <>
-          <div className="todo_top_content">
-            <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-          </div>
-          <div className={s.block_buttons}>
-            <Button className={s.block__button} onClick={() => {}}>
-              Save
-            </Button>
-            <Button className={s.block__button} onClick={toggleEdit}>
-              Cancel
-            </Button>
-          </div>
+          <EditedTodo
+            id={id}
+            editedTitle={editedTitle}
+            setEditedTitle={setEditedTitle}
+            toggleEdit={toggleEdit}
+            setIsEditable={setIsEditable}
+          />
         </>
       ) : (
         <>
-          <div className="todo_top_content">
-            <Typography className={s.todo_top_content__title} tag="h4">
-              {title}
-            </Typography>
-            <div className={s.todo_top_content__description}>{description}</div>
-          </div>
-          <div className={s.block_buttons}>
-            <Button className={s.block__button} onClick={toggleEdit}>
-              Edit
-            </Button>
-            <Button
-              className={s.block__button}
-              onClick={() => {
-                handleDelete(id);
-              }}
-            >
-              X
-            </Button>
-          </div>
+          <DefaultTodo
+            id={id}
+            title={title}
+            description={description}
+            handleDelete={handleDelete}
+            toggleEdit={toggleEdit}
+          />
         </>
       )}
     </div>

@@ -1,5 +1,7 @@
 "use server";
 
+import { useState } from "react";
+
 import ListOfTodos from "@/modules/todo/components/listOfTodos/ListOfTodos";
 
 import AddTodoForm from "@/shared/addTodoForm/AddTodoForm";
@@ -8,8 +10,8 @@ import Typography from "@/ui/typography/Typography";
 
 import s from "./page.module.scss";
 
-const getData = async () => {
-  const response = await fetch(`http://localhost:3000/todos`, {
+const getData = async (page: number) => {
+  const response = await fetch(`http://localhost:3000/todos/?page=${page}`, {
     next: { revalidate: 0 },
   });
 
@@ -21,7 +23,7 @@ const getData = async () => {
 };
 
 export default async function Home() {
-  const data = await getData();
+  const data = await getData(0);
 
   return (
     <div className={s.page}>

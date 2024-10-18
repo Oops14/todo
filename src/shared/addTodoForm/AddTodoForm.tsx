@@ -31,6 +31,7 @@ const AddTodoForm = () => {
       console.log("Todo created:", data);
 
       router.refresh();
+
       // Reset the form.
       e.target.reset();
     } catch (error) {

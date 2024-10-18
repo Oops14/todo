@@ -36,9 +36,12 @@ const ListOfTodos: FC<ListOfTodosProps> = ({ data }) => {
 
   return (
     <div>
-      {data.map((d) => (
-        <Todo key={d.id} id={d.id} title={d.title} description={d.description} handleDelete={handleDelete} />
-      ))}
+      <div>
+        {data.map((d) => (
+          <Todo key={d.id} id={d.id} title={d.title} description={d.description} handleDelete={handleDelete} />
+        ))}
+      </div>
+      <div></div>
     </div>
   );
 };
