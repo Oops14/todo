@@ -1,6 +1,6 @@
 "use server";
 
-import ListOfTodos from "@/modules/todo/components/listOfTodos/ListOfTodos";
+import ListOfTodos from "@/components/listOfTodos/ListOfTodos";
 
 import { getData } from "@/services/api";
 

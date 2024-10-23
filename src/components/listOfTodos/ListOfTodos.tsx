@@ -4,7 +4,7 @@ import { FC } from "react";
 
 import { handleDelete } from "@/services/api";
 
-import Todo from "../../Todo";
+import Todo from "../../modules/todo/Todo";
 
 import { TodosData } from "@/types/TodosDataType";
 
