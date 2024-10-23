@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import { FC } from "react";
+
+import { handleDelete } from "@/services/api";
 
 import Todo from "../../Todo";
 
@@ -13,27 +13,6 @@ interface ListOfTodosProps {
 }
 
 const ListOfTodos: FC<ListOfTodosProps> = ({ data }) => {
-  const router = useRouter();
-
-  const handleDelete = async (id: number) => {
-    try {
-      const res = await fetch(`http://localhost:3000/todos/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to create todo");
-      }
-
-      const data = await res.json();
-      console.log("Todo removed:", data);
-
-      router.refresh();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
   return (
     <div>
       <div>

@@ -1,6 +1,8 @@
-import { useRouter } from "next/navigation";
+"use client";
 
 import { FC } from "react";
+
+import { handleUpdate } from "@/services/api";
 
 import Button from "@/ui/button/Button";
 
@@ -15,28 +17,6 @@ interface EditedTodoProps {
 }
 
 const EditedTodo: FC<EditedTodoProps> = ({ id, editedTitle, setEditedTitle, toggleEdit, setIsEditable }) => {
-  const router = useRouter();
-
-  const handleUpdate = async (id: number) => {
-    try {
-      const res = await fetch(`http://localhost:3000/todos/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title: editedTitle }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to update todo");
-      }
-
-      router.refresh();
-    } catch (error) {
-      console.error("Error updating todo:", error);
-    }
-  };
-
   return (
     <>
       <div className="todo_top_content">
@@ -46,7 +26,7 @@ const EditedTodo: FC<EditedTodoProps> = ({ id, editedTitle, setEditedTitle, togg
         <Button
           className={s.block__button}
           onClick={() => {
-            handleUpdate(id);
+            handleUpdate(id, editedTitle);
             setIsEditable(false);
           }}
         >

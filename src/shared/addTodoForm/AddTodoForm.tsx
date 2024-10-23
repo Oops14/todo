@@ -1,8 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import SubmitButton from "@/components/submitButton/SubmitButton";
+import SubmitButton from "@/shared/submitButton/SubmitButton";
+
+import { handleSubmit } from "@/services/api";
 
 import Form from "@/ui/form/Form";
 import Input from "@/ui/input/Input";
@@ -10,42 +12,30 @@ import Input from "@/ui/input/Input";
 import s from "./AddTodoForm.module.scss";
 
 const AddTodoForm = () => {
-  const router = useRouter();
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-
-    try {
-      const res = await fetch(`http://localhost:3000/todos`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to create todo");
-      }
-
-      const data = await res.json();
-      console.log("Todo created:", data);
-
-      router.refresh();
-
-      // Reset the form.
-      e.target.reset();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
-    <Form className={s.todolist__form} onSubmit={handleSubmit}>
-      <Input placeholder="Enter the title of todo" className={s.todolist__input} type="text" name="title" required />
+    <Form className={s.todolist__form} action={() => handleSubmit(title, description)}>
+      <Input
+        placeholder="Enter the title of todo"
+        className={s.todolist__input}
+        type="text"
+        value={title}
+        onChange={(e) => {
+          setTitle(e.currentTarget.value);
+        }}
+        name="title"
+        required
+      />
       <Input
         placeholder="Enter the Description"
         className={s.todolist__input}
         type="text"
+        value={description}
+        onChange={(e) => {
+          setDescription(e.currentTarget.value);
+        }}
         name="description"
         required
       />

@@ -1,0 +1,22 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  justify-content: center;
+}
+
+.pagination__item {
+  list-style: none;
+}
+
+.pagination__item__link {
+  padding: 10px;
+  background-color: burlywood;
+
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
