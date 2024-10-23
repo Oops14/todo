@@ -1,5 +1,7 @@
 "use server";
 
+import { notFound } from "next/navigation";
+
 import { revalidateTodos } from "./actions";
 
 export const getData = async () => {
@@ -8,7 +10,7 @@ export const getData = async () => {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   await revalidateTodos();
@@ -22,7 +24,7 @@ export const getPagesData = async (page: number) => {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   return await response.json();
@@ -39,7 +41,7 @@ export const handleSubmit = async (title: string, description: string) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to create todo");
+      notFound();
     }
 
     await revalidateTodos();
@@ -55,7 +57,7 @@ export const handleDelete = async (id: number) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to create todo");
+      notFound();
     }
 
     await revalidateTodos();
@@ -75,7 +77,7 @@ export const handleUpdate = async (id: number, editedTitle: string) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to update todo");
+      notFound();
     }
 
     await revalidateTodos();

@@ -6,7 +6,7 @@ import { handleUpdate } from "@/services/api";
 
 import Button from "@/ui/button/Button";
 
-import s from "../../Todo.module.scss";
+import s from "../../modules/todo/Todo.module.scss";
 
 interface EditedTodoProps {
   id: number;

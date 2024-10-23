@@ -5,7 +5,7 @@ import { FC } from "react";
 import Button from "@/ui/button/Button";
 import Typography from "@/ui/typography/Typography";
 
-import s from "../../Todo.module.scss";
+import s from "../../modules/todo/Todo.module.scss";
 
 interface DefaultTodoProps {
   id: number;

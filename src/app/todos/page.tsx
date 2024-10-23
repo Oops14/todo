@@ -1,21 +1,30 @@
 "use server";
 
 import ListOfTodos from "@/modules/todo/components/listOfTodos/ListOfTodos";
+
 import { getPagesData } from "@/services/api";
+
 import Typography from "@/ui/typography/Typography";
-import s from "../page.module.scss"; // Updated path based on your directory structure
+
 import Pagination from "@/shared/pagination/Pagination";
 import AddTodoForm from "@/shared/addTodoForm/AddTodoForm";
 
+import { TodosData } from "@/types/TodosDataType";
+
+import s from "../page.module.scss";
+
 interface PaginationProps {
   searchParams: {
-    page?: string;
+    page: string;
   };
 }
 
 export default async function TodosPage({ searchParams }: PaginationProps) {
-  const currentPage = parseInt(searchParams.page || "1", 10);
-  const data = await getPagesData(currentPage);
+  const currentPage = parseInt(searchParams.page || "1");
+
+  const data: TodosData[] = await getPagesData(currentPage);
+
+  const totalPages = data.length;
 
   return (
     <div className={s.page}>
@@ -29,7 +38,7 @@ export default async function TodosPage({ searchParams }: PaginationProps) {
 
           <ListOfTodos data={data} />
 
-          <Pagination currentPage={currentPage} totalPages={10} />
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
         </div>
       </main>
     </div>

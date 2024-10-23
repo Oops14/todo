@@ -2,8 +2,8 @@
 
 import { FC, useState } from "react";
 
-import EditedTodo from "./components/editedTodo/EditedTodo";
-import DefaultTodo from "./components/defaultTodo/DefaultTodo";
+import EditedTodo from "../../shared/editedTodo/EditedTodo";
+import DefaultTodo from "../../shared/defaultTodo/DefaultTodo";
 
 import s from "./Todo.module.scss";
 
